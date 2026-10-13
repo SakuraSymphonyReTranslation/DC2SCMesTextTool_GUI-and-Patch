@@ -1,0 +1,28 @@
+{
+  "message": "Ingin keluar?",
+  "mes_sha256": "e7d696d7a3c0adbe3778909c070ffe9eed5def011d41716d6b26ea3584df5639",
+  "sprite_sha256": "c7e94e5eb07cf4909791510236c0f09b2a3515a6846ccebe51555277a1e0ac40",
+  "original_mes_sha256": "50599e2af8a38e2e7e144cf845ef9ecf3c09ec4c9afbfb79fb9ca3fe8fb931c4",
+  "original_sprite_sha256": "deb8e0e62d95d4155818b62fb9275fd934e2a239e784c899bb436cc1351f4806",
+  "instruction_count_preserved": 1377,
+  "label_targets_preserved": 27,
+  "relocated_labels": 4,
+  "resource_references_changed": 4,
+  "caption_bytes_removed": 14,
+  "font": "MS PGothic",
+  "font_size": 28,
+  "text_bitmap_size": [
+    144,
+    24
+  ],
+  "text_screen_center": [
+    400,
+    278
+  ],
+  "changed_pixel_bounds": [
+    260,
+    30,
+    404,
+    54
+  ]
+}

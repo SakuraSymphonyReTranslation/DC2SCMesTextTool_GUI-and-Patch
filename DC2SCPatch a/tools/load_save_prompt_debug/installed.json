@@ -1,0 +1,42 @@
+{
+  "LOAD": {
+    "message": "Muat Permainan?",
+    "font_size": 28,
+    "sprite": "common_load_chip00.CRX",
+    "mes_sha256": "21c013b10c53fdb294d4e23902410d2643a873a5903edd605f93b442e3684928",
+    "sprite_sha256": "3ca99483b3492644b89f8b51dd12500bd7742e9572e9bdc052f539f15773e993",
+    "original_mes_sha256": "d28ea230141691817ab18dcfadedb9c747030cf80a93500064be32035dd3845c",
+    "original_sprite_sha256": "0b4487c397fd02c147a027641bc898a64ce282a86ccad2e20ecee9f0856448cc",
+    "changed_pixel_bounds": [
+      223,
+      176,
+      443,
+      202
+    ],
+    "instructions_preserved": 261,
+    "label_targets_preserved": 18,
+    "relocated_labels": 16,
+    "caption_bytes_removed": 16,
+    "sprite_reference_changed": false
+  },
+  "SAVE": {
+    "message": "Simpan Disini?",
+    "font_size": 30,
+    "sprite": "common_save_chip00.CRX",
+    "mes_sha256": "9a01abe40a678f9b8e19d0a33aebc591e7b4ae50a7b98d5e7af2e3fe64fbf539",
+    "sprite_sha256": "09e6dd17cbc3b063cb7c1f5f1a23d0eef49fe4e15f4e645ea0ee1f4f19619913",
+    "original_mes_sha256": "8c0dd5d12bc84a2bdd62da97c5b04bd14cd3b126590fa539939e8a5dd9a02eb0",
+    "original_sprite_sha256": "0b4487c397fd02c147a027641bc898a64ce282a86ccad2e20ecee9f0856448cc",
+    "changed_pixel_bounds": [
+      232,
+      173,
+      433,
+      205
+    ],
+    "instructions_preserved": 463,
+    "label_targets_preserved": 19,
+    "relocated_labels": 16,
+    "caption_bytes_removed": 15,
+    "sprite_reference_changed": true
+  }
+}

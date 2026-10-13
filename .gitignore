@@ -1,0 +1,19 @@
+# Visual Studio & .NET
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Build logs & temp
+*.log
+*.tmp
+*.bak
+
+# C++ intermediate build folders
+build_cmake/
+x64/
+Win32/
+*.VC.db
+*.opendb

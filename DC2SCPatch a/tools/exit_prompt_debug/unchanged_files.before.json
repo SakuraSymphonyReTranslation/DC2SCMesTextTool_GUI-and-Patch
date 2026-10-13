@@ -1,0 +1,19 @@
+{
+  "id_Data\\MES\\LOAD.mes": "21c013b10c53fdb294d4e23902410d2643a873a5903edd605f93b442e3684928",
+  "id_Data\\MES\\SAVE.mes": "9a01abe40a678f9b8e19d0a33aebc591e7b4ae50a7b98d5e7af2e3fe64fbf539",
+  "id_Data\\MES\\option.mes": "18f36b8f159964eba2091d7b3a7c70efeab1f01b8e1dab8a96a1c0b878101aac",
+  "id_Data\\GRP\\SYSTEM\\common_load_chip00.CRX": "3ca99483b3492644b89f8b51dd12500bd7742e9572e9bdc052f539f15773e993",
+  "id_Data\\GRP\\SYSTEM\\common_save_chip00.CRX": "09e6dd17cbc3b063cb7c1f5f1a23d0eef49fe4e15f4e645ea0ee1f4f19619913",
+  "id_Data\\GRP\\SYSTEM\\systemconfig_chip00.CRX": "436a300c0e685849c298d7b972c5e8bfc59f844e970069f4ac8ee18b4d6cf6de",
+  "id_Data\\GRP\\SYSTEM\\yn_chip01.CRX": "a84bbb2d6c28ca9c33b22b01435521deb9c50882c65b21dc36d4ba91d5601478",
+  "AdvData\\GRP\\SYSTEM\\yn_chip00.CRX": "deb8e0e62d95d4155818b62fb9275fd934e2a239e784c899bb436cc1351f4806",
+  "DC2SC.EXE": "cb1a9cdcd8c60b310fc7cdc4dab0bf544cd6d160853e8fa99afa92074d4039e4",
+  "DC2SCDVD.EXE": "61affe06c6c27d34796493a5236f1c1249c383ecd54f3b4ec9eadff780bba8c8",
+  "DC2SCLauncher.exe": "db3ad68ff97d11887ea5344db33097519a0b7011335411365ac8b4deedc3dc29",
+  "DC2SC_DVD NoDVD\u5316 \u30b7\u30ea\u30a2\u30eb\u56de\u907f.EXE": "638ae1b2a9a66bb58d30d4f512c36f867b43dc75a939771f85b81b34a4b85e0b",
+  "DCIISC_TPach101.exe": "099f52057bb82156d8f1b19707bebed5eb11e0fb762b7e25c9176a1e17cdc4cd",
+  "uinst.exe": "4b1488c7ed442da2b95a956a74bbc24b1ef2ccf54d630fc1727d83218832f890",
+  "DC2SCPatch.dll": "a39d1ecdf74298897332c644bf00edc98efdc91c72d15cde740251cd4052c4ef",
+  "LoaderDll.dll": "82fae0f44f4ca0c9c37907df74cef2415eeb5fae1cf8d4f36f34ffcaf7e3cc0c",
+  "LocaleEmulator.dll": "c79c175fdad174aa46a72197d148316299a56f950aaab1b84930d09ee1084a88"
+}

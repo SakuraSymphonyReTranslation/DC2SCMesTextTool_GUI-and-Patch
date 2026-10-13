@@ -1,0 +1,14 @@
+{
+  "message": "Reset Config?",
+  "mes_sha256": "18f36b8f159964eba2091d7b3a7c70efeab1f01b8e1dab8a96a1c0b878101aac",
+  "sprite_sha256": "436a300c0e685849c298d7b972c5e8bfc59f844e970069f4ac8ee18b4d6cf6de",
+  "changed_pixel_bounds": [
+    640,
+    245,
+    828,
+    279
+  ],
+  "instructions_preserved": 1416,
+  "label_targets_preserved": 52,
+  "relocated_labels": 34
+}

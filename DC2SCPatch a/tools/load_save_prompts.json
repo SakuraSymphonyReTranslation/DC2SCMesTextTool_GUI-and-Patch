@@ -1,0 +1,10 @@
+[
+  {
+    "dialog": "LOAD",
+    "message": "Muat Permainan?"
+  },
+  {
+    "dialog": "SAVE",
+    "message": "Simpan Disini?"
+  }
+]
