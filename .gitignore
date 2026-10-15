@@ -17,3 +17,11 @@ x64/
 Win32/
 *.VC.db
 *.opendb
+
+# Local investigation outputs and save backups
+/DC2SCPatch a/build_choice/
+/DC2SCPatch a/tools/choice_debug/
+
+# Keep the complete Visual Studio build directory in the repository.
+!/DC2SCPatch a/build/
+!/DC2SCPatch a/build/**

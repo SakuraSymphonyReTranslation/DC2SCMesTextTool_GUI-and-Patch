@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\Games\DC2SC\DC2SCMesTextTool_GUI and Patch\DC2SCPatch a\src\dc2scpatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="E:\Games\DC2SC\DC2SCMesTextTool_GUI and Patch\DC2SCPatch a\src\choice_layout.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Games\DC2SC\DC2SCMesTextTool_GUI and Patch\DC2SCPatch a\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4C64844A-D238-39F1-AD07-A71A4CF6F69B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F1C28CF6-861B-34B6-8028-DF9CEE80F85F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

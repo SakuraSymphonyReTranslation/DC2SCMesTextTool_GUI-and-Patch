@@ -1171,6 +1171,7 @@ static thread_local int g_dialogueLatinRenderDepth = 0;
 static thread_local int g_popupUiLatinRenderDepth = 0;
 static thread_local int g_hsxf4LatinRenderDepth = 0;
 static thread_local bool g_hsxf4ChoiceRender = false;
+static thread_local bool g_nativeChoiceRaster = false;
 static thread_local bool g_hsxf4PopupRender = false;
 static thread_local bool g_hsxf4ReplayRender = false;
 static thread_local bool g_hsxf4NameplateRender = false;
@@ -10807,6 +10808,9 @@ static MAT2 MakeDialogueGlyphMat2XY(const MAT2 *src, int xPercent,
 static DWORD WINAPI Hook_GetGlyphOutlineA(HDC hdc, UINT uChar, UINT fuFormat,
                                           LPGLYPHMETRICS lpgm, DWORD cjBuffer,
                                           LPVOID pvBuffer, const MAT2 *lpmat2) {
+  if (g_nativeChoiceRaster)
+    return Real_GetGlyphOutlineA(hdc, uChar, fuFormat, lpgm, cjBuffer,
+                                pvBuffer, lpmat2);
   if (InHsxf4LatinRender()) {
     if (IsNonRenderableTextControlA(uChar))
       return ReturnEmptyChoiceGlyph(lpgm, cjBuffer, pvBuffer);
@@ -13344,6 +13348,8 @@ static void CleanupSyncedFrom(const char *manifestFile,
 // Initialization
 // ============================================================================
 
+#include "choice_layout.h"
+
 static void InitPatch() {
   LogPatchLoad("InitPatch.begin");
   DiagLogProcessState("InitPatch.begin");
@@ -13413,6 +13419,7 @@ static void InitPatch() {
   // GetGlyphOutline is only customized while HSXF4 is drawing the temporary
   // half-width Latin glyph. All other in-game dialogue calls pass through.
   DetourAttach(&(PVOID &)Real_GetGlyphOutlineA, Hook_GetGlyphOutlineA);
+  AttachNativeChoiceLayout();
   DetourAttach(&(PVOID &)Real_GetGlyphOutlineW, Hook_GetGlyphOutlineW);
   DetourAttach(&(PVOID &)Real_CreateFileA, Hook_CreateFileA);
   DetourAttach(&(PVOID &)Real_CreateFileW, Hook_CreateFileW);
@@ -13500,6 +13507,10 @@ static void CleanupPatch() {
   DetourUpdateThread(GetCurrentThread());
   if (Real_Hsxf4_1C970)
     DetourDetach(&(PVOID &)Real_Hsxf4_1C970, Hook_Hsxf4_1C970);
+  if (Real_NativeChoiceText)
+    DetourDetach(&(PVOID &)Real_NativeChoiceText, Hook_NativeChoiceText);
+  if (Real_NativeChoiceWidget)
+    DetourDetach(&(PVOID &)Real_NativeChoiceWidget, Hook_NativeChoiceWidget);
   DetourDetach(&(PVOID &)Real_GetGlyphOutlineA, Hook_GetGlyphOutlineA);
   DetourDetach(&(PVOID &)Real_GetGlyphOutlineW, Hook_GetGlyphOutlineW);
   DetourDetach(&(PVOID &)Real_CreateFileA, Hook_CreateFileA);

@@ -1,38 +1,24 @@
 @echo off
-echo ==========================================
-echo Building DC2SC Patch (Launcher + DLL)
-echo ==========================================
+setlocal
+pushd "%~dp0"
+if errorlevel 1 exit /b 1
 
-if not exist build_cmake mkdir build_cmake
-cd build_cmake
+echo [1/2] Generating Visual Studio 2022 solution in build...
+cmake --fresh -S . -B build -G "Visual Studio 17 2022" -A Win32
+if errorlevel 1 goto failed
 
-echo [1/2] Configuring CMake...
-cmake .. -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=Release
-if %errorlevel% neq 0 (
-    echo [ERROR] CMake failed.
-    pause
-    exit /b %errorlevel%
-)
-
-echo [2/2] Compiling...
-nmake
-if %errorlevel% neq 0 (
-    echo [ERROR] Compilation failed.
-    pause
-    exit /b %errorlevel%
-)
+echo [2/2] Building Release / Win32...
+cmake --build build --config Release --parallel
+if errorlevel 1 goto failed
 
 echo.
-echo ==========================================
-echo [SUCCESS] Build completed!
-echo ==========================================
-echo.
-echo Output files:
-echo   - build_cmake\DC2SCLauncher.exe
-echo   - build_cmake\DC2SCPatch.dll
-echo.
-echo Installation:
-echo   1. Copy BOTH files to the DC2SC game folder
-echo   2. Run DC2SCLauncher.exe instead of DC2SC.EXE
-echo.
-pause
+echo [SUCCESS] Solution: build\DC2SCPatch.sln
+echo Output: build\Release\DC2SCLauncher.exe and build\Release\DC2SCPatch.dll
+echo Copy both files to the game folder to install the new build.
+popd
+exit /b 0
+
+:failed
+echo [ERROR] Build failed. Check the messages above.
+popd
+exit /b 1

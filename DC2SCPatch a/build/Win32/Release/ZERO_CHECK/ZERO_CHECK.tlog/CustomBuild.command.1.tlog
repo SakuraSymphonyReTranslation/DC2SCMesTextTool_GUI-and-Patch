@@ -1,0 +1,10 @@
+^E:\GAMES\DC2SC\DC2SCMESTEXTTOOL_GUI AND PATCH\DC2SCPATCH A\BUILD\CMAKEFILES\409EADAFDF4C102C0C8510432E2895F9\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SE:/Games/DC2SC/DC2SCMesTextTool_GUI and Patch/DC2SCPatch a" "-BE:/Games/DC2SC/DC2SCMesTextTool_GUI and Patch/DC2SCPatch a/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "E:/Games/DC2SC/DC2SCMesTextTool_GUI and Patch/DC2SCPatch a/build/DC2SCPatch.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\Games\DC2SC\DC2SCMesTextTool_GUI and Patch\DC2SCPatch a\src\launcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Games\DC2SC\DC2SCMesTextTool_GUI and Patch\DC2SCPatch a\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="E:\Games\DC2SC\DC2SCMesTextTool_GUI and Patch\DC2SCPatch a\src\launcher.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F1C28CF6-861B-34B6-8028-DF9CEE80F85F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -26,7 +26,11 @@ add_library(detours STATIC
 # ============================================================================
 add_library(DC2SCPatch SHARED
     src/dc2scpatch.cpp
+    src/choice_layout.h
 )
+if(MSVC)
+    target_compile_options(DC2SCPatch PRIVATE /utf-8)
+endif()
 
 target_link_libraries(DC2SCPatch PRIVATE 
     detours

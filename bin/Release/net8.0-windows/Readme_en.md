@@ -18,7 +18,7 @@ Download both packages from [GitHub Releases](https://github.com/SakuraSymphonyR
 1. Close the game and back up any files that will be replaced, especially the executable and `DC2SCPatch.ini`.
 2. Extract the contents of `Released_patch.rar` directly into `<GAME_DIR>`, so that `DC2SCLauncher.exe`, `DC2SCPatch.dll`, and `DC2SCPatch.ini` are next to `DC2SC.EXE`.
 3. Run **`<GAME_DIR>\DC2SCLauncher.exe`** with `<GAME_DIR>` as the working directory. If you use a shortcut, set its **Start in** field to that folder.
-4. Select the appropriate language in the patch settings (`Language=1` for Indonesian, `Language=0` for English). Place Indonesian MES files in `<GAME_DIR>\id_Data\MES`; for English, use `<GAME_DIR>\eng_data\MES`.
+4. Select the appropriate language in the patch settings (`Language=1` for Indonesian, `Language=2` for English, `Language=0` for original Japanese). Place Indonesian MES files in `<GAME_DIR>\id_Data\MES`; for English, use `<GAME_DIR>\eng_data\MES`.
 
 ```text
 <GAME_DIR>/
@@ -76,6 +76,13 @@ Both the Single File and Batch tabs export using the format shown above. Export 
 
 The original template is required to preserve bytecode instructions, non-text tokens, and scenario label flow.
 
+**Choice labels and Scene Replay titles**
+
+- If a choice in the original MES starts with `○`, the importer restores that marker when it is missing from the translated JSON.
+- Repeated spaces in choice labels are collapsed to one space, including the gap after `○`. Spaces are stored in a form compatible with encrypted MES strings and restored to ordinary spaces when exporting JSON.
+- Scene Replay titles can be changed in JSON and imported back into MES. The DLL calculates the title size when the game displays it: longer titles shrink to fit their cards. No font size field in JSON or patch rebuild is needed.
+- After replacing MES files or the DLL, restart the game through `DC2SCLauncher.exe` to load the changes.
+
 ## Batch
 
 - **Batch Export:** set **MES Folder** and **Output Folder**, then click **Batch Export (MES -> JSON)**.
@@ -88,6 +95,9 @@ The original template is required to preserve bytecode instructions, non-text to
 - **`DC2SCPatch.dll`** is automatically injected by `DC2SCLauncher.exe`.
 - **DVD check bypass:** The AdvSys32 engine in DC2SC performs optical CD/DVD drive checks at startup. The patch spoofs the optical drive to allow seamless playback on modern PCs without optical drives (including Linux/Wine/Proton).
 - **Font & Text Scaling:** Font rendering and Shift-JIS / Latin character scaling are configured via `DC2SCPatch.ini` (`DialogueRenderScale=74`, `DialogueAdvanceScale=62`, `DialogueSpaceScale=24`).
+- **Choice Layout:** Compact padding before `○`, after the marker, and between words. Long choices scale to the width of their boxes.
+- **Sakura Effects:** Choice text remains intact when falling sakura animation redraws part of the screen.
+- **Scene Replay Titles:** Latin titles in replay cards automatically scale to the available space. Date lines, popup sizes, and textbox settings keep their existing configuration.
 - **File Redirection:** Redirects MES script reads to `id_Data\MES` (or `eng_data\MES`) without overwriting original game archives in `AdvData`.
 - **System Prompt Localization:** Utility scripts in `DC2SCPatch a/tools/` provide patchers for bitmap confirmation prompts (Save, Load, Exit).
 
@@ -96,7 +106,7 @@ Technical patch instructions are available in the [patch README](DC2SCPatch%20a/
 ## Validation and encoding
 
 - DC2SC uses the **Shift-JIS (CP932)** encoding.
-- Encrypted bytecode strings use XOR key `0x20`.
+- Encrypted bytecode strings subtract `0x20` from each byte when stored and add `0x20` when read (modulo 256).
 - MES labels are recalculated based on the Offset1 label table structure (`labelCount * 4 + 4`).
 - Unsupported characters are validated to prevent garbled text or runtime crashes.
 
@@ -122,3 +132,5 @@ dotnet build -c Release
 ```
 
 Building the GUI requires the .NET 8 SDK. To build the C++ patch DLL and launcher, see the instructions in the [patch README](DC2SCPatch%20a/Readme_en.md).
+
+The Visual Studio 2022 solution is located directly at `DC2SCPatch a/build/DC2SCPatch.sln`. Select **Release | Win32**, then **Build → Build Solution**. The repository includes the entire `build` folder; `build/Release` contains compiled output, while `build/Released` contains the distribution package. After cloning to another location, regenerate the solution using the CMake steps in the patch README so that paths match your computer.

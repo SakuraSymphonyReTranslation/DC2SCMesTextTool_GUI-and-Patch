@@ -674,6 +674,9 @@ public class MesScript
         text = NormalizeMesInputText(text);
         if (IsAsciiChoiceId(originalText) && IsAsciiChoiceId(text))
             return text.Trim();
+        // Preserve the structural choice marker when a translator omits it.
+        if (IsChoiceLabel(originalText) && !IsChoiceLabel(text))
+            text = "○ " + text.TrimStart();
         if (IsChoiceLabel(text))
             return NormalizeChoiceLabelForMes(text, preserveLatinAscii);
         if (preserveLatinAscii)
@@ -827,6 +830,11 @@ public class MesScript
         // letters Latin when requested, but store word gaps as full-width
         // spaces so the encrypted string is not truncated.
         string normalized = NormalizeAsciiWidthForMesLatin(text.Trim());
+        // The native choice renderer gives these stored gaps a compact width.
+        // Canonicalize repeated whitespace and always separate marker and label.
+        normalized = Regex.Replace(normalized.Replace('~', ' ').Replace('^', ' '), @"\s+", " ");
+        if (normalized.StartsWith("○", StringComparison.Ordinal))
+            normalized = "○ " + normalized[1..].TrimStart();
         var sb = new StringBuilder(text.Length);
         foreach (char c in normalized)
         {

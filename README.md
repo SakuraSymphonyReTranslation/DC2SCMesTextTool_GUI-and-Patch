@@ -18,7 +18,7 @@ Unduh kedua paket terbaru dari [GitHub Releases](https://github.com/SakuraSympho
 1. Tutup game dan simpan salinan berkas lama yang akan diganti, terutama executable dan `DC2SCPatch.ini`.
 2. Ekstrak isi `Released_patch.rar` langsung ke `<GAME_DIR>`, sehingga `DC2SCLauncher.exe`, `DC2SCPatch.dll`, dan `DC2SCPatch.ini` berada di sebelah `DC2SC.EXE`.
 3. Jalankan **`<GAME_DIR>\DC2SCLauncher.exe`** dengan working directory `<GAME_DIR>`. Jika memakai shortcut, isi **Start in** dengan folder tersebut.
-4. Pilih bahasa yang sesuai pada pengaturan patch (`Language=1` untuk Indonesia, `Language=0` untuk Inggris). Berkas MES Indonesia ditempatkan di `<GAME_DIR>\id_Data\MES`; untuk bahasa Inggris, gunakan `<GAME_DIR>\eng_data\MES`.
+4. Pilih bahasa yang sesuai pada pengaturan patch (`Language=1` untuk Indonesia, `Language=2` untuk Inggris, `Language=0` untuk Jepang asli). Berkas MES Indonesia ditempatkan di `<GAME_DIR>\id_Data\MES`; untuk bahasa Inggris, gunakan `<GAME_DIR>\eng_data\MES`.
 
 ```text
 <GAME_DIR>/
@@ -76,6 +76,13 @@ Ekspor dari tab Single File dan Batch menggunakan format di atas. Teks, nama Jep
 
 Template asli dibutuhkan untuk menjaga struktur bytecode, token non-teks, dan alur label.
 
+**Teks pilihan dan judul Scene Replay**
+
+- Jika pilihan pada MES asli diawali `○`, importer mengembalikan tanda tersebut apabila terhapus dari JSON terjemahan.
+- Spasi berulang pada pilihan dirapikan menjadi satu spasi, termasuk jarak setelah `○`. Spasi disimpan dalam bentuk yang aman untuk MES terenkripsi dan dikembalikan menjadi spasi biasa saat ekspor JSON.
+- Judul Scene Replay dapat diganti melalui JSON lalu diimpor kembali ke MES. Ukuran judul dihitung otomatis oleh DLL saat game menampilkannya: judul panjang diperkecil agar tetap muat di kartu. Tidak perlu menambahkan pengaturan ukuran font di JSON atau membangun ulang patch.
+- Setelah mengganti MES atau DLL, jalankan ulang game melalui `DC2SCLauncher.exe` agar perubahan dimuat.
+
 ## Batch
 
 - **Batch Export:** isi **MES Folder** di kolom `MES Folder` dan tentukan output di `Output Folder`, lalu klik **Batch Export (MES -> JSON)**.
@@ -88,6 +95,9 @@ Template asli dibutuhkan untuk menjaga struktur bytecode, token non-teks, dan al
 - **`DC2SCPatch.dll`** disuntikkan secara otomatis oleh `DC2SCLauncher.exe`.
 - **Bypass DVD check:** Engine AdvSys32 DC2SC melakukan pengecekan drive optik saat startup. Patch menyertakan spoofing drive sehingga game dapat berjalan mulus di sistem modern tanpa drive optik (termasuk Linux/Wine/Proton).
 - **Font & Text Scaling:** Pengaturan rendering font dan scaling karakter Shift-JIS / alfabet dikonfigurasi melalui `DC2SCPatch.ini` (`DialogueRenderScale=74`, `DialogueAdvanceScale=62`, `DialogueSpaceScale=24`).
+- **Layout Pilihan:** Jarak sebelum `○`, setelah tanda, dan antar kata dibuat lebih rapat. Pilihan panjang menyesuaikan ukuran dengan lebar kotaknya.
+- **Efek Sakura:** Teks pilihan tetap utuh saat animasi daun sakura menggambar ulang sebagian layar.
+- **Judul Scene Replay:** Judul Latin pada kartu replay menyesuaikan ukuran otomatis dengan ruang yang tersedia. Baris tanggal, ukuran popup, dan pengaturan textbox tetap menggunakan pengaturan semula.
 - **File Redirection:** Arahkan pembacaan file skrip MES ke folder `id_Data\MES` (atau `eng_data\MES`) tanpa perlu menimpa berkas asli di `AdvData`.
 - **System Prompt Localization:** Script pendukung di `DC2SCPatch a/tools/` menyediakan patch untuk popup teks konfirmasi (seperti Simpan, Muat, Keluar).
 
@@ -96,7 +106,7 @@ Petunjuk teknis patch tersedia di [README patch](DC2SCPatch%20a/README.md).
 ## Validasi dan encoding
 
 - Engine DC2SC menggunakan encoding **Shift-JIS (CP932)**.
-- String bytecode terenkripsi menggunakan XOR key `0x20`.
+- String bytecode terenkripsi disimpan dengan mengurangi setiap byte sebesar `0x20`, lalu dibaca kembali dengan menambahkan `0x20` (modulo 256).
 - Label MES dihitung ulang berdasarkan struktur header tabel label Offset1 (`labelCount * 4 + 4`).
 - Karakter yang tidak didukung Shift-JIS divalidasi agar tidak menyebabkan teks rusak atau crash di dalam game.
 
@@ -122,3 +132,5 @@ dotnet build -c Release
 ```
 
 Build GUI membutuhkan .NET 8 SDK. Untuk build patch DLL dan launcher C++, lihat petunjuk di [README patch](DC2SCPatch%20a/README.md).
+
+Solution Visual Studio 2022 tersedia langsung di `DC2SCPatch a/build/DC2SCPatch.sln`. Pilih **Release | Win32**, lalu **Build → Build Solution**. Seluruh isi folder `build` disertakan di repository; `build/Release` berisi hasil kompilasi, sedangkan `build/Released` berisi paket distribusi. Setelah clone ke lokasi lain, buat ulang solution dengan langkah CMake pada README patch agar path sesuai komputer Anda.
